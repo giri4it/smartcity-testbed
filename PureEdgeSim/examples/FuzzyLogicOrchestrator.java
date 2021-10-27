@@ -53,7 +53,7 @@ public class FuzzyLogicOrchestrator extends CustomEdgeOrchestrator {
 		return -1;
 	}
 
-	private int fuzzyLogic(Task task) { 
+	private int fuzzyLogic(Task task) {
 		String fileName = "PureEdgeSim/examples/Example8_settings/stage1.fcl";
 		FIS fis = FIS.load(fileName, true);
 		// Error while loading?
@@ -73,22 +73,23 @@ public class FuzzyLogicOrchestrator extends CustomEdgeOrchestrator {
 		}
 
 		// set fuzzy inputs
-		fis.setVariable("wan",
-				SimulationParameters.WAN_BANDWIDTH / 1000 - simulationManager.getNetworkModel().getWanUtilization());
-		fis.setVariable("tasklength", task.getLength());
-		fis.setVariable("delay", task.getMaxLatency());
-		fis.setVariable("vm", vmUsage / count);
+		//fis.setVariable("wan",
+		//		SimulationParameters.WAN_BANDWIDTH / 1000 - simulationManager.getNetworkModel().getWanUtilization());
+		//fis.setVariable("tasklength", task.getLength());
+		//fis.setVariable("delay", task.getMaxLatency());
+		//fis.setVariable("vm", vmUsage / count);
 
 		// Evaluate
-		fis.evaluate();
+		//fis.evaluate();
 
-		if (fis.getVariable("offload").defuzzify() > 50) {
-			String[] architecture2 = { "Cloud" };
-			return increseLifetime(architecture2, task);
-		} else {
-			String[] architecture2 = { "Edge", "Mist" };
-			return stage2(architecture2, task);
-		}
+		//if (fis.getVariable("offload").defuzzify() > 50) {
+		//	String[] architecture2 = { "Cloud" };
+		//	return increseLifetime(architecture2, task);
+		//} else {
+		//	String[] architecture2 = { "Edge", "Mist" };
+		//	return stage2(architecture2, task);
+		//}
+		return 0;
 
 	}
 
@@ -102,7 +103,7 @@ public class FuzzyLogicOrchestrator extends CustomEdgeOrchestrator {
 			System.err.println("Can't load file: '" + fileName + "'");
 			return -1;
 		}
-		for (int i = 0; i < vmList.size(); i++) {
+		/*for (int i = 0; i < vmList.size(); i++) {
 			if (offloadingIsPossible(task, vmList.get(i), architecture2)
 					&& vmList.get(i).getStorage().getCapacity() > 0) {
 				if (!task.getEdgeDevice().getMobilityManager().isMobile())
@@ -117,7 +118,7 @@ public class FuzzyLogicOrchestrator extends CustomEdgeOrchestrator {
 					vm = i;
 				}
 			}
-		}
+		}*/
 		return vm;
 	}
 
